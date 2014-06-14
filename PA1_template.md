@@ -2,24 +2,20 @@
 
 
 ## Loading and preprocessing the data
-Directly download the dataset and load it accordingly. Convert date column into date format.
+Directly download the dataset and load it accordingly.
 
-```{r echo = TRUE}
+
+```r
 url <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
 temp <- tempfile()
 download.file(url, temp, method = "curl")
 data <- read.csv(unz(temp, "activity.csv"))
 unlink(temp)
-data$date <- strptime(data$date, "%Y-%m-%d")
 ```
+
 
 ## What is mean total number of steps taken per day?
-1. Histogram of the total number of steps taken each day
 
-```{r echo = TRUE}
-
-
-```
 
 
 ## What is the average daily activity pattern?
