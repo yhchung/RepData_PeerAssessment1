@@ -109,11 +109,17 @@ The mean of the total number of steps is `r as.integer(new.steps.mean)` and the 
 
 ## Differences in activity patterns between weekdays and weekends
 
+### 1. Dataset with new factor variable "weekdays" -- indicating weekday or weekend
+
 ```{r echo = TRUE}
 library(chron)
 new.data$week<-factor(is.weekend(new.data$date), 
                       levels=c(T, F), labels=c("Weekend", "Weekday"))
+```
 
+### 2. Plots of the 5-minute interval and the average number of steps taken.
+
+```{r echo = TRUE}
 new.sbi <- aggregate(steps ~ interval + week, new.data, mean)
 
 plot(new.sbi[new.sbi$week=="Weekday",]$steps, type = "l",
@@ -125,3 +131,5 @@ plot(new.sbi[new.sbi$week=="Weekend",]$steps, type = "l",
      xlab = "5-min interval", ylab = "Averaged number of steps")
 
 ```
+
+The subject looks to walk more often on weekends than weekdays. 

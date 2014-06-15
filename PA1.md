@@ -121,14 +121,21 @@ new.steps.median <- median(new.spd)
 The mean of the total number of steps is 10766 and the median is 10766. The mean is same, but median is different. It is because missing values were filled in the average of its interval.
 
 
-## Are there differences in activity patterns between weekdays and weekends?
+## Differences in activity patterns between weekdays and weekends
+
+### 1. Dataset with new factor variable "weekdays" -- indicating weekday or weekend
 
 
 ```r
 library(chron)
 new.data$week<-factor(is.weekend(new.data$date), 
                       levels=c(T, F), labels=c("Weekend", "Weekday"))
+```
 
+### 2. Plots of the 5-minute interval and the average number of steps taken.
+
+
+```r
 new.sbi <- aggregate(steps ~ interval + week, new.data, mean)
 
 plot(new.sbi[new.sbi$week=="Weekday",]$steps, type = "l",
@@ -136,7 +143,7 @@ plot(new.sbi[new.sbi$week=="Weekday",]$steps, type = "l",
      xlab = "5-min interval", ylab = "Averaged number of steps")
 ```
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-101.png) 
+![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-111.png) 
 
 ```r
 plot(new.sbi[new.sbi$week=="Weekend",]$steps, type = "l",
@@ -144,4 +151,6 @@ plot(new.sbi[new.sbi$week=="Weekend",]$steps, type = "l",
      xlab = "5-min interval", ylab = "Averaged number of steps")
 ```
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-102.png) 
+![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-112.png) 
+
+
