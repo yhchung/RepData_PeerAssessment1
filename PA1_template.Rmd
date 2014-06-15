@@ -16,8 +16,9 @@ unlink(temp)
 ### 1. Histogram of the total number of steps taken each day
 
 ```{r echo = TRUE}
-steps_per_day <- aggregate(steps ~ date, data, sum)$steps
-hist(steps_per_day,
+# spd: steps per day
+spd <- aggregate(steps ~ date, data, sum)$steps
+hist(spd,
      main = "The total number of steps taken per day",
      xlab = "Steps", ylab = "Frequency (day)",
      breaks = 10)
@@ -26,11 +27,11 @@ hist(steps_per_day,
 ### 2. The mean and median of the total number of steps taken per day
 
 ```{r echo = TRUE}
-steps.mean <- mean(steps_per_day)
-steps.median <- median(steps_per_day)
+mean.spd <- mean(spd)
+median.spd <- median(spd)
 ```
 
-The mean of the total number of steps is `r as.integer(steps.mean)` and the median is `r steps.median`.
+The mean of the total number of steps is `r as.integer(mean.spd)` and the median is `r median.spd`.
 
 
 ## What is the average daily activity pattern?
@@ -117,14 +118,13 @@ new.data$week<-factor(is.weekend(new.data$date),
                       levels=c(T, F), labels=c("Weekend", "Weekday"))
 ```
 
-### 2. Plots of the 5-minute interval and the average number of steps taken.
+### 2. Plot of the 5-minute interval and the average number of steps taken.
 
 ```{r echo = TRUE}
 new.sbi <- aggregate(steps ~ interval + week, new.data, mean)
 
 library(ggplot2)
-ggplot(new.sbi, aes(interval, steps)) + geom_line() + facet_grid(week ~ .) 
-+ xlab("5-minute interval") + ylab("Averaged number of steps")
+ggplot(new.sbi, aes(interval, steps)) + geom_line() + facet_grid(week ~ .) + xlab("5-minute interval") + ylab("Averaged number of steps")
 ```
 
 The subject looks to walk more often on weekends than weekdays. 
